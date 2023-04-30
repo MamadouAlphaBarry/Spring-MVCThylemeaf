@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"
+      layout:decorate="template1"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+
+      xmlns
+>
+<head>
+    <meta charset="UTF-8">
+    <title>ajputer patient</title>
+</head>
+<body>
+<div layout:fragment="content1" >
+  <div class="card mt-4">
+    <div class="card-header">
+      <h1>Creation dun Patient</h1>
+    </div>
+    <div class="card-body">
+      <form th:action="@{save}" th:method="post">
+        <div class="mb-3 mt-3">
+          <label for="name" class="form-label">Name:</label>
+          <input type="name" class="form-control" id="name" placeholder="Enter Votre Nom" name="name" th:value="${patient.name}">
+          <span class="text-danger text-center" th:errors="${patient.name}"></span>
+        </div>
+        <div class="mb-3">
+          <label for="address" class="form-label">Address:</label>
+          <input type="text" class="form-control" id="address" placeholder="Enter Votre address" name="address" th:value="${patient.address}">
+        <span class="text-danger text-center" th:errors="${patient.address}"></span>
+        </div>
+        <div class="mb-3">
+          <label for="dn" class="form-label">Address:</label>
+          <input type="date" class="form-control" id="dn" placeholder="Enter Votre date de naissance" name="naissance" th:value="${patient.dateDeNaissance}">
+        <span class="text-danger text-center" th:errors="${patient.dateDeNaissance}"></span>
+        </div>
+        <div class="mb-3">
+          <label for="malade" class="form-label">Status:</label>
+          <input type="checkbox"  id="malade"  name="status" th:checked="${patient.malade}">
+          <span th:errors="${patient.malade}"></span>
+        </div>
+        <div class="mb-3">
+          <label for="score" class="form-label">Score:</label>
+          <input  type="text" class="form-control" id="score" placeholder="Enter Votre score" name="score" th:value="${patient.score}">
+          <span class="text-danger text-center" th:errors="${patient.score}"></span>
+        </div>
+        <button type="submit" class="btn btn-lg btn-outline-primary">Enregister</button>
+      </form>
+    </div>
+
+  </div>
+
+</div>
+</body>
+</html>

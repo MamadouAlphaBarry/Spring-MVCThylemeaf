@@ -1,0 +1,83 @@
+<!DOCTYPE html >
+<html lang="en" layout:decorate="template1"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="webjars/bootstrap/5.2.3/css/bootstrap.min.css">
+    <script src="webjars/sweetalert/2.1.0/sweetalert.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+
+    <div layout:fragment="content1" >
+
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col">
+            <h1>PatientController</h1>
+            <form action="" method="get" th:action="@{/}" class="my-4">
+                <div class="row">
+                    <div class="col">
+                        <input type="text" name="keyword"  class="form-control form-control-lg"
+                               placeholder="search" th:value="${keyword}">
+                    </div>
+                    <div class="col">   <button class="btn btn-primary btn-lg">Search</button></div>
+                </div>
+
+            </form>
+            <div class="card">
+                <div class="card-header text-center h3">Liste des Patients</div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Date De Naissance</th>
+                            <th>Malade</th>
+                            <th>Score</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="patient:${patients}" >
+                            <td th:text="${patient.id}"></td>
+                            <td th:text="${patient.name}"></td>
+                            <td th:text="${patient.address}"></td>
+                            <td th:text="${patient.dateDeNaissance}"></td>
+                            <td th:text="${patient.malade}"></td>
+                            <td th:text="${patient.score}"></td>
+
+                            <td>
+                                <a th:href="@{/edit(id=${patient.id},keyword=${keyword},page=${currentPage})}" class="btn btn-outline-info">Edit</a>
+                                <a onclick="javascript:return confirm('Etes vous Sur de bien Vouloir supprimer cet article?')" th:href="@{/delete(id=${patient.id},keyword=${keyword},page=${currentPage})}" class="btn btn-outline-danger">Delete</a>
+                            </td>
+
+                        </tr>
+
+                        </tbody>
+                      >
+                    </table>
+                    <ul class="pagination pagination-sm">
+                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item"
+                            th:each="page,status:${pages}">
+                            <a class="page-link" th:href="@{/(page=${status.index},keyword=${keyword})}"
+                               th:text="${status.index}"
+                            th:class="${currentPage==status.index?'btn btn-info ms-1':'btn btn-outline-info ms-1'}"></a></li>
+
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+
+</body>
+</html>
